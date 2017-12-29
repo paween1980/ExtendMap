@@ -63,7 +63,7 @@ map[string]interface{}{
 }
 ```
 
-So, we can use:-
+## Usage:
 ```javascript
 m1 := map[string]interface{}{
     "key1": "value1",
