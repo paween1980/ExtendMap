@@ -1,6 +1,7 @@
 package extend_map
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 )
@@ -77,5 +78,41 @@ func TestExtendMap(t *testing.T) {
 	}
 	if reflect.DeepEqual(b, result) {
 		t.Error("Expect clone new map but it appends")
+	}
+}
+
+func TestExtendMap_inputNil(t *testing.T) {
+	a := map[string]interface{}{
+		"key1": "value1",
+	}
+	result := ExtendMap(a, nil)
+	if !reflect.DeepEqual(result, a) {
+		t.Errorf("Expect result should be %#v\n", a)
+	}
+
+	result = ExtendMap(nil, a)
+	if !reflect.DeepEqual(result, a) {
+		t.Errorf("Expect result should be %#v\n", a)
+	}
+
+	nilMap := map[string]interface{}{}
+	result = ExtendMap(a, nilMap)
+	if !reflect.DeepEqual(result, a) {
+		t.Errorf("Expect result should be %#v\n", a)
+	}
+
+	result = ExtendMap(nilMap, a)
+	if !reflect.DeepEqual(result, a) {
+		t.Errorf("Expect result should be %#v\n", a)
+	}
+
+	result = ExtendMap(nil, nil)
+	if !reflect.DeepEqual(result, nilMap) {
+		t.Error("Expect result should be nilMap but", result)
+	}
+
+	b, _ := json.Marshal(result)
+	if string(b) != "{}" {
+		t.Error("Expect json.Marshal nilMap should be {} but", string(b))
 	}
 }
