@@ -9,26 +9,35 @@ For example:-
 ```javascript
 map[string]interface{}{
     "key1": "value1",
-    "key2": "value2",
+    "dup1": map[string]interface{}{
+        "key2": "value2",
+    },
 }
 ```
 ```json
 {
     "key1": "value1",
-    "key2": "value2"
+    "dup1": {
+        "key2": "value2"
+    }
 }
 ```
 
 * map/json#2
 ```javascript
 map[string]interface{}{
-    "key1": "value1",
-    "key2": "value2",
+    "key3": "value3",
+    "dup1": map[string]interface{}{
+        "key4": "value4",
+    },
 }
 ```
 ```json
 {
-    "key3": "value3"
+    "key3": "value3",
+    "dup1": {
+        "key4": "value4"
+    }
 }
 ```
 
@@ -36,15 +45,21 @@ map[string]interface{}{
 ```javascript
 map[string]interface{}{
     "key1": "value1",
-    "key2": "value2",
     "key3": "value3",
+    "dup1": map[string]interface{}{
+        "key2": "value2",
+        "key4": "value4",
+    },
 }
 ```
 ```json
 {
     "key1": "value1",
-    "key2": "value2",
-    "key3": "value3"
+    "key3": "value3",
+    "dup1": {
+        "key2": "value2",
+        "key4": "value4"
+    }
 }
 ```
 
@@ -52,10 +67,15 @@ So, we can use:-
 ```javascript
 m1 := map[string]interface{}{
     "key1": "value1",
-    "key2": "value2",
+    "dup1": map[string]interface{}{
+        "key2": "value2",
+    },
 }
 m2 := map[string]interface{}{
     "key3": "value3",
+    "dup1": map[string]interface{}{
+        "key4": "value4",
+    },
 }
 result := ExtendMap(m1, m2)
 ```
