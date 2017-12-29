@@ -1,7 +1,7 @@
 # ExtendMap
 Golang: extend map[string]interface{} that often use with JSON.
 
-Need to merge 2 maps/json in golang.
+Need to merge 2 maps/json in golang. The result is a new extend map.
 
 For example:-
 
